@@ -7,7 +7,7 @@ let computerSelection;
 let gameOver = false;
 
 // makes sure that player input is case insensitive 
-// converts all to lowercase and capitalises first letter
+// converts all characters to lowercase and capitalises first letter
 
 function getPlayerChoice (playerInput) {
     let caseInsensitiveInput = playerInput.toLowerCase();
@@ -24,24 +24,26 @@ function getComputerChoice () {
     return computerSelection;
 }
 
-
-function game(playerPointScore, computerPointScore) {
-    while (gameOver === false) {
-        if (playerPointScore < 5 && computerPointScore < 5) {
-            playerSelection = prompt("Rock, paper or scissors?");
-            computerSelection = getComputerChoice();
-            playRound(playerSelection, computerSelection);
-        }
-    }
-}
-
 function validatePointScore(playerPointScore, computerPointScore) {
     if (playerPointScore >= 5 || computerPointScore >= 5) {
         gameOver = true;
     }
 }
 
+// set gameOver to true if point score reached
+
+function tryExitGame () {
+    if (gameOver == true) {
+        if (playerPointScore >= 5) {
+            alert("You win! Refresh page to play again.")
+        } else {
+            alert("You lose! Refresh page to play again.")
+        }
+    }
+}
+
 // swtich statement to compare player vs computer selection
+// lots of repeated code, would like to refactor this if I have the time
 
 function playRound (playerSelection, computerSelection) {
     playerSelection = getPlayerChoice(playerSelection);
@@ -52,17 +54,20 @@ function playRound (playerSelection, computerSelection) {
                 validatePointScore(playerPointScore, computerPointScore);
                 alert(`You win! ${playerSelection} blunts ${computerSelection}.`)
                 alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+                tryExitGame();
                 return;
             } else if (computerSelection == "Paper") {
                 computerPointScore += 1;
                 validatePointScore(playerPointScore, computerPointScore);
                 alert(`You lose! ${computerSelection} wraps ${playerSelection}.`)
                 alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+                tryExitGame();
                 return;
             } else {
                 validatePointScore(playerPointScore, computerPointScore);
                 alert(`Draw! ${playerSelection} is equal to ${computerSelection}. Play again!`)
                 alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+                tryExitGame();
                 return;
             }
 
@@ -72,17 +77,20 @@ function playRound (playerSelection, computerSelection) {
                 validatePointScore(playerPointScore, computerPointScore);
                 alert(`You win! ${playerSelection} wraps ${computerSelection}.`)
                 alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+                tryExitGame();
                 return;
             } else if (computerSelection == "Scissors") {
                 computerPointScore += 1;
                 validatePointScore(playerPointScore, computerPointScore);
                 alert(`You lose! ${computerSelection} cuts ${playerSelection}.`)
                 alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+                tryExitGame();
                 return;
             } else {
                 validatePointScore(playerPointScore, computerPointScore);
                 alert(`Draw! ${playerSelection} is equal to ${computerSelection}. Play again!`)
                 alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+                tryExitGame();
                 return;
             }
         
@@ -92,22 +100,35 @@ function playRound (playerSelection, computerSelection) {
                 validatePointScore(playerPointScore, computerPointScore);
                 alert(`You win! ${playerSelection} cuts ${computerSelection}.`)
                 alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+                tryExitGame();
                 return;
             } else if (computerSelection == "Rock") {
                 computerPointScore += 1;
                 validatePointScore(playerPointScore, computerPointScore);
                 alert(`You lose! ${computerSelection} blunts ${playerSelection}.`)
                 alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+                tryExitGame();
                 return;
             } else {
                 validatePointScore(playerPointScore, computerPointScore);
                 alert(`Draw! ${playerSelection} is equal to ${computerSelection}. Play again!`)
                 alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+                tryExitGame();
                 return;
             }
         default:
             alert("Invalid value entered.")
             return;
+    }
+}
+
+function game(playerPointScore, computerPointScore) {
+    while (gameOver === false) {
+        if (playerPointScore < 5 && computerPointScore < 5) {
+            playerSelection = prompt("Rock, paper or scissors?");
+            computerSelection = getComputerChoice();
+            playRound(playerSelection, computerSelection);
+        }
     }
 }
 
