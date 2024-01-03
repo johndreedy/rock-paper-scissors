@@ -1,3 +1,5 @@
+// this is a message for github pages to indicate that I am using the rps-ui branch
+
 let playerPointScore = 0;
 let computerPointScore = 0;
 
