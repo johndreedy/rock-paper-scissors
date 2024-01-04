@@ -44,6 +44,32 @@ function tryExitGame () {
     }
 }
 
+function roundWin (playerSelection, computerSelection, itemVerb) {
+    playerPointScore += 1;
+    validatePointScore(playerPointScore, computerPointScore);
+    alert(`You win! ${playerSelection} ${itemVerb} ${computerSelection}.`)
+    alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+    tryExitGame();
+    return;
+}
+
+function roundLose (playerSelection, computerSelection, itemVerb) {
+    computerPointScore += 1;
+    validatePointScore(playerPointScore, computerPointScore);
+    alert(`You lose! ${computerSelection} ${itemVerb} ${playerSelection}.`)
+    alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+    tryExitGame();
+    return;
+}
+
+function roundDraw (playerSelection, computerSelection) {
+    validatePointScore(playerPointScore, computerPointScore);
+    alert(`Draw! ${playerSelection} is equal to ${computerSelection}. Play again!`)
+    alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
+    tryExitGame();
+    return;
+}
+
 // swtich statement to compare player vs computer selection
 // lots of repeated code, would like to refactor this if I have the time
 
@@ -52,70 +78,37 @@ function playRound (playerSelection, computerSelection) {
     switch (playerSelection) {
         case "Rock":
             if (computerSelection == "Scissors") {
-                playerPointScore += 1;
-                validatePointScore(playerPointScore, computerPointScore);
-                alert(`You win! ${playerSelection} blunts ${computerSelection}.`)
-                alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-                tryExitGame();
+                roundWin(playerSelection, computerSelection, "blunts");
                 return;
             } else if (computerSelection == "Paper") {
-                computerPointScore += 1;
-                validatePointScore(playerPointScore, computerPointScore);
-                alert(`You lose! ${computerSelection} wraps ${playerSelection}.`)
-                alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-                tryExitGame();
+                roundLose(playerSelection, computerSelection,"wraps");
                 return;
             } else {
-                validatePointScore(playerPointScore, computerPointScore);
-                alert(`Draw! ${playerSelection} is equal to ${computerSelection}. Play again!`)
-                alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-                tryExitGame();
+                roundDraw(playerSelection, computerSelection);
                 return;
             }
 
         case "Paper":
             if (computerSelection == "Rock") {
-                playerPointScore += 1;
-                validatePointScore(playerPointScore, computerPointScore);
-                alert(`You win! ${playerSelection} wraps ${computerSelection}.`)
-                alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-                tryExitGame();
+                roundWin(playerSelection, computerSelection, "wraps");
                 return;
             } else if (computerSelection == "Scissors") {
-                computerPointScore += 1;
-                validatePointScore(playerPointScore, computerPointScore);
-                alert(`You lose! ${computerSelection} cuts ${playerSelection}.`)
-                alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-                tryExitGame();
+                roundLose(playerSelection, computerSelection,"cuts");
                 return;
             } else {
-                validatePointScore(playerPointScore, computerPointScore);
-                alert(`Draw! ${playerSelection} is equal to ${computerSelection}. Play again!`)
-                alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-                tryExitGame();
+                roundDraw(playerSelection, computerSelection);
                 return;
             }
         
         case "Scissors":
             if (computerSelection == "Paper") {
-                playerPointScore += 1;
-                validatePointScore(playerPointScore, computerPointScore);
-                alert(`You win! ${playerSelection} cuts ${computerSelection}.`)
-                alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-                tryExitGame();
+                roundWin(playerSelection, computerSelection, "cuts");
                 return;
             } else if (computerSelection == "Rock") {
-                computerPointScore += 1;
-                validatePointScore(playerPointScore, computerPointScore);
-                alert(`You lose! ${computerSelection} blunts ${playerSelection}.`)
-                alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-                tryExitGame();
+                roundLose(playerSelection, computerSelection,"blunts");
                 return;
             } else {
-                validatePointScore(playerPointScore, computerPointScore);
-                alert(`Draw! ${playerSelection} is equal to ${computerSelection}. Play again!`)
-                alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-                tryExitGame();
+                roundDraw(playerSelection, computerSelection);
                 return;
             }
         default:

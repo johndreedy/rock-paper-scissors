@@ -1,0 +1,14 @@
+.rps-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    gap: 1em;
+}
+
+.rock,
+.paper,
+.scissors {
+    display: flex;
+    background-color:#ffffff;
+}
