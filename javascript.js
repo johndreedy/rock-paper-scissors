@@ -1,3 +1,5 @@
+/*
+
 // this is a message for github pages to indicate that I am using the rps-ui branch
 
 let playerPointScore = 0;
@@ -5,8 +7,6 @@ let computerPointScore = 0;
 
 let playerSelection;
 let computerSelection;
-
-let gameOver = false;
 
 // makes sure that player input is case insensitive 
 // converts all characters to lowercase and capitalises first letter
@@ -26,47 +26,23 @@ function getComputerChoice () {
     return computerSelection;
 }
 
-function validatePointScore(playerPointScore, computerPointScore) {
-    if (playerPointScore >= 5 || computerPointScore >= 5) {
-        gameOver = true;
-    }
-}
-
-// set gameOver to true if point score reached
-
-function tryExitGame () {
-    if (gameOver == true) {
-        if (playerPointScore >= 5) {
-            alert("You win! Refresh page to play again.")
-        } else {
-            alert("You lose! Refresh page to play again.")
-        }
-    }
-}
-
 function roundWin (playerSelection, computerSelection, itemVerb) {
     playerPointScore += 1;
-    validatePointScore(playerPointScore, computerPointScore);
     alert(`You win! ${playerSelection} ${itemVerb} ${computerSelection}.`)
     alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-    tryExitGame();
     return;
 }
 
 function roundLose (playerSelection, computerSelection, itemVerb) {
     computerPointScore += 1;
-    validatePointScore(playerPointScore, computerPointScore);
     alert(`You lose! ${computerSelection} ${itemVerb} ${playerSelection}.`)
     alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-    tryExitGame();
     return;
 }
 
 function roundDraw (playerSelection, computerSelection) {
-    validatePointScore(playerPointScore, computerPointScore);
     alert(`Draw! ${playerSelection} is equal to ${computerSelection}. Play again!`)
     alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-    tryExitGame();
     return;
 }
 
@@ -117,14 +93,27 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-function game(playerPointScore, computerPointScore) {
-    while (gameOver === false) {
-        if (playerPointScore < 5 && computerPointScore < 5) {
-            playerSelection = prompt("Rock, paper or scissors?");
-            computerSelection = getComputerChoice();
-            playRound(playerSelection, computerSelection);
-        }
-    }
+function game() {
+    playerSelection = prompt("Rock, paper or scissors?");
+    computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
 }
 
-game(playerPointScore, computerPointScore);
+*/
+
+let displayText = document.querySelector('.display-text');
+
+const ROCK_BUTTON = document.querySelector('.rock');
+ROCK_BUTTON.addEventListener('click', () => {
+    displayText.textContent = "You pressed rock!"
+  });
+
+const PAPER_BUTTON = document.querySelector('.paper');
+PAPER_BUTTON.addEventListener('click', () => {
+    displayText.textContent = "You pressed paper!"
+  });
+
+const SCISSORS_BUTTON = document.querySelector('.scissors');
+SCISSORS_BUTTON.addEventListener('click', () => {
+    displayText.textContent = "You pressed scissors!"
+  });

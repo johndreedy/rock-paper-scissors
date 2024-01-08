@@ -1,7 +1,22 @@
+body {
+    font-family: Roboto, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+}
+
+.display-text,
+.title-text {
+    display: flex;
+    justify-content: center;
+}
+
 .rps-wrapper {
     display: flex;
     justify-content: center;
-    margin: 0;
+    margin: 1em;
     padding: 0;
     gap: 1em;
 }
@@ -10,5 +25,11 @@
 .paper,
 .scissors {
     display: flex;
-    background-color:#ffffff;
+    justify-content: center;
+    align-items: center;
+    background-color:#dbdbdb;
+    border-radius: 10%;
+    min-width: 100px;
+    min-height: 30px;
+    font-size: 18px;
 }
