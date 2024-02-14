@@ -4,10 +4,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    flex-basis: auto;
 }
 
-.display-text,
 .title-text {
     display: flex;
     justify-content: center;
@@ -19,6 +17,32 @@ body {
     margin: 1em;
     padding: 0;
     gap: 1em;
+}
+
+.icon-wrapper-main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.computer-icon-wrapper,
+.player-icon-wrapper {
+    gap: 1em;
+    margin: 1em;
+}
+
+.computer-icon,
+.player-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.img {
+    height: 140px;
+    width: 140px;
 }
 
 .rock,

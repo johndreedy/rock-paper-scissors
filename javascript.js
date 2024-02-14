@@ -19,12 +19,7 @@ function getPlayerChoice (playerInput) {
 
 // random computer selection
 
-function getComputerChoice () {
-    const computerOptions = ["Rock", "Paper", "Scissors"];
-    let randomSelectionIndex = Math.floor(Math.random() * computerOptions.length);
-    let computerSelection = computerOptions[randomSelectionIndex];
-    return computerSelection;
-}
+
 
 function roundWin (playerSelection, computerSelection, itemVerb) {
     playerPointScore += 1;
@@ -101,19 +96,52 @@ function game() {
 
 */
 
-let displayText = document.querySelector('.display-text');
+const COMPUTER_ICON = document.querySelector('.computer-icon');
+const PLAYER_ICON = document.querySelector('.player-icon');
 
 const ROCK_BUTTON = document.querySelector('.rock');
 ROCK_BUTTON.addEventListener('click', () => {
-    displayText.textContent = "You pressed rock!"
+    PLAYER_ICON.src = 'images/rock.png';
+    getComputerChoice();
   });
 
 const PAPER_BUTTON = document.querySelector('.paper');
 PAPER_BUTTON.addEventListener('click', () => {
-    displayText.textContent = "You pressed paper!"
+    PLAYER_ICON.src = 'images/paper.png';
+    getComputerChoice();
   });
 
 const SCISSORS_BUTTON = document.querySelector('.scissors');
 SCISSORS_BUTTON.addEventListener('click', () => {
-    displayText.textContent = "You pressed scissors!"
+    PLAYER_ICON.src = 'images/scissors.png';
+    getComputerChoice();
   });
+
+function getComputerChoice () {
+    const computerOptions = ["Rock", "Paper", "Scissors"];
+    let randomSelectionIndex = Math.floor(Math.random() * computerOptions.length);
+    let computerSelection = computerOptions[randomSelectionIndex];
+    setComputerIcon(computerSelection);
+    return computerSelection;
+}
+
+
+function setComputerIcon (computerSelection) {
+    switch (computerSelection) {
+        case "Rock":
+            COMPUTER_ICON.src = 'images/rock.png';
+            break;
+
+        case "Paper":
+            COMPUTER_ICON.src = 'images/paper.png';
+            break;
+
+        case "Scissors":
+            COMPUTER_ICON.src = 'images/scissors.png';
+            break;
+
+        default:
+            COMPUTER_ICON.src = 'images/blank.png';
+            break;
+    }
+}
