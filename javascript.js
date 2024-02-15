@@ -2,25 +2,6 @@
 
 // this is a message for github pages to indicate that I am using the rps-ui branch
 
-let playerPointScore = 0;
-let computerPointScore = 0;
-
-let playerSelection;
-let computerSelection;
-
-// makes sure that player input is case insensitive 
-// converts all characters to lowercase and capitalises first letter
-
-function getPlayerChoice (playerInput) {
-    let caseInsensitiveInput = playerInput.toLowerCase();
-    let capitalisedInput = caseInsensitiveInput.charAt(0).toUpperCase() + caseInsensitiveInput.slice(1);
-    return capitalisedInput;
-}
-
-// random computer selection
-
-
-
 function roundWin (playerSelection, computerSelection, itemVerb) {
     playerPointScore += 1;
     alert(`You win! ${playerSelection} ${itemVerb} ${computerSelection}.`)
@@ -45,7 +26,6 @@ function roundDraw (playerSelection, computerSelection) {
 // lots of repeated code, would like to refactor this if I have the time
 
 function playRound (playerSelection, computerSelection) {
-    playerSelection = getPlayerChoice(playerSelection);
     switch (playerSelection) {
         case "Rock":
             if (computerSelection == "Scissors") {
@@ -99,49 +79,78 @@ function game() {
 const COMPUTER_ICON = document.querySelector('.computer-icon');
 const PLAYER_ICON = document.querySelector('.player-icon');
 
+const COMPUTER_TEXT = document.querySelector('.computer-text');
+const PLAYER_TEXT = document.querySelector('.player-text');
+
+let playerPointScore = 0;
+let computerPointScore = 0;
+
 const ROCK_BUTTON = document.querySelector('.rock');
 ROCK_BUTTON.addEventListener('click', () => {
     PLAYER_ICON.src = 'images/rock.png';
-    getComputerChoice();
+    PLAYER_TEXT.textContent = "Rock";
+    playRound("Rock", getComputerChoice());
   });
 
 const PAPER_BUTTON = document.querySelector('.paper');
 PAPER_BUTTON.addEventListener('click', () => {
     PLAYER_ICON.src = 'images/paper.png';
-    getComputerChoice();
+    PLAYER_TEXT.textContent = "Paper";
+    playRound("Paper", getComputerChoice());
   });
 
 const SCISSORS_BUTTON = document.querySelector('.scissors');
 SCISSORS_BUTTON.addEventListener('click', () => {
     PLAYER_ICON.src = 'images/scissors.png';
-    getComputerChoice();
+    PLAYER_TEXT.textContent = "Scissors";
+    playRound("Scissors", getComputerChoice());
   });
-
-function getComputerChoice () {
-    const computerOptions = ["Rock", "Paper", "Scissors"];
-    let randomSelectionIndex = Math.floor(Math.random() * computerOptions.length);
-    let computerSelection = computerOptions[randomSelectionIndex];
-    setComputerIcon(computerSelection);
-    return computerSelection;
-}
-
 
 function setComputerIcon (computerSelection) {
     switch (computerSelection) {
         case "Rock":
             COMPUTER_ICON.src = 'images/rock.png';
+            COMPUTER_TEXT.textContent = "Rock";
             break;
 
         case "Paper":
             COMPUTER_ICON.src = 'images/paper.png';
+            COMPUTER_TEXT.textContent = "Paper";
             break;
 
         case "Scissors":
             COMPUTER_ICON.src = 'images/scissors.png';
+            COMPUTER_TEXT.textContent = "Scissors";
             break;
 
         default:
             COMPUTER_ICON.src = 'images/blank.png';
             break;
+    }
+}
+
+function getComputerChoice () {
+    const computerOptions = ["Rock", "Paper", "Scissors"];
+    let randomSelectionIndex = Math.floor(Math.random() * computerOptions.length);
+    let computerSelection = computerOptions[randomSelectionIndex];
+    return computerSelection;
+}
+
+function playRound (playerSelection, computerSelection) {
+    
+    setComputerIcon(computerSelection);
+
+    switch (playerSelection) {
+        case "Rock":
+        break;
+
+        case "Paper":
+        break;
+
+        case "Scissors":
+        break;
+
+        default:
+        break;
     }
 }

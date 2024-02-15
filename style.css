@@ -4,6 +4,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: rgb(217, 226, 223);
 }
 
 .title-text {
@@ -17,6 +18,13 @@ body {
     margin: 1em;
     padding: 0;
     gap: 1em;
+}
+
+.score-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6em;
 }
 
 .icon-wrapper-main {
@@ -40,9 +48,23 @@ body {
     flex-direction: column;
 }
 
+.computer-text,
+.player-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .img {
     height: 140px;
     width: 140px;
+}
+
+.rps-round-text {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
 }
 
 .rock,
