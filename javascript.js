@@ -1,72 +1,10 @@
 /*
 
-// this is a message for github pages to indicate that I am using the rps-ui branch
+- this is a message for github pages to indicate that I am using the rps-ui branch
 
-function roundWin (playerSelection, computerSelection, itemVerb) {
-    playerPointScore += 1;
-    alert(`You win! ${playerSelection} ${itemVerb} ${computerSelection}.`)
-    alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-    return;
-}
+- mostly cleaned up legacy code, although some refactoring could be in order
 
-function roundLose (playerSelection, computerSelection, itemVerb) {
-    computerPointScore += 1;
-    alert(`You lose! ${computerSelection} ${itemVerb} ${playerSelection}.`)
-    alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-    return;
-}
-
-function roundDraw (playerSelection, computerSelection) {
-    alert(`Draw! ${playerSelection} is equal to ${computerSelection}. Play again!`)
-    alert(`Player score ${playerPointScore}, computer score ${computerPointScore}.`)
-    return;
-}
-
-// swtich statement to compare player vs computer selection
-// lots of repeated code, would like to refactor this if I have the time
-
-function playRound (playerSelection, computerSelection) {
-    switch (playerSelection) {
-        case "Rock":
-            if (computerSelection == "Scissors") {
-                roundWin(playerSelection, computerSelection, "blunts");
-                return;
-            } else if (computerSelection == "Paper") {
-                roundLose(playerSelection, computerSelection,"wraps");
-                return;
-            } else {
-                roundDraw(playerSelection, computerSelection);
-                return;
-            }
-
-        case "Paper":
-            if (computerSelection == "Rock") {
-                roundWin(playerSelection, computerSelection, "wraps");
-                return;
-            } else if (computerSelection == "Scissors") {
-                roundLose(playerSelection, computerSelection,"cuts");
-                return;
-            } else {
-                roundDraw(playerSelection, computerSelection);
-                return;
-            }
-        
-        case "Scissors":
-            if (computerSelection == "Paper") {
-                roundWin(playerSelection, computerSelection, "cuts");
-                return;
-            } else if (computerSelection == "Rock") {
-                roundLose(playerSelection, computerSelection,"blunts");
-                return;
-            } else {
-                roundDraw(playerSelection, computerSelection);
-                return;
-            }
-        default:
-            alert("Invalid value entered.")
-            return;
-    }
-}
+- could feed params through main game() function which is triggered on player R-P-S button press?
 
 function game() {
     playerSelection = prompt("Rock, paper or scissors?");
@@ -81,6 +19,10 @@ const PLAYER_ICON = document.querySelector('.player-icon');
 
 const COMPUTER_TEXT = document.querySelector('.computer-text');
 const PLAYER_TEXT = document.querySelector('.player-text');
+
+let roundPlayedText = document.querySelector('.rps-round-text');
+let playerScoreText = document.querySelector('.player-score-text');
+let computerScoreText = document.querySelector('.computer-score-text');
 
 let playerPointScore = 0;
 let computerPointScore = 0;
@@ -137,20 +79,62 @@ function getComputerChoice () {
 }
 
 function playRound (playerSelection, computerSelection) {
-    
-    setComputerIcon(computerSelection);
 
+    setComputerIcon(computerSelection);
     switch (playerSelection) {
         case "Rock":
-        break;
+            if (computerSelection == "Scissors") {
+                roundWin(playerSelection, computerSelection, "blunts");
+                return;
+            } else if (computerSelection == "Paper") {
+                roundLose(playerSelection, computerSelection,"wraps");
+                return;
+            } else {
+                roundDraw(playerSelection, computerSelection);
+                return;
+            }
 
         case "Paper":
-        break;
-
+            if (computerSelection == "Rock") {
+                roundWin(playerSelection, computerSelection, "wraps");
+                return;
+            } else if (computerSelection == "Scissors") {
+                roundLose(playerSelection, computerSelection,"cuts");
+                return;
+            } else {
+                roundDraw(playerSelection, computerSelection);
+                return;
+            }
+        
         case "Scissors":
-        break;
-
-        default:
-        break;
+            if (computerSelection == "Paper") {
+                roundWin(playerSelection, computerSelection, "cuts");
+                return;
+            } else if (computerSelection == "Rock") {
+                roundLose(playerSelection, computerSelection,"blunts");
+                return;
+            } else {
+                roundDraw(playerSelection, computerSelection);
+                return;
+            }
     }
+}
+
+function roundWin (playerSelection, computerSelection, itemVerb) {
+    playerPointScore += 1;
+    playerScoreText.textContent = `Player score: ${playerPointScore}`
+    roundPlayedText.textContent = `You win! ${playerSelection} ${itemVerb} ${computerSelection}.`;
+    return;
+}
+
+function roundLose (playerSelection, computerSelection, itemVerb) {
+    computerPointScore += 1;
+    computerScoreText.textContent = `Computer score: ${computerPointScore}`
+    roundPlayedText.textContent = `You lose! ${computerSelection} ${itemVerb} ${playerSelection}.`;
+    return;
+}
+
+function roundDraw (playerSelection, computerSelection) {
+    roundPlayedText.textContent = `Draw! ${playerSelection} is equal to ${computerSelection}.`;
+    return;
 }
