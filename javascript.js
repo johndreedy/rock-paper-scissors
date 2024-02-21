@@ -1,19 +1,3 @@
-/*
-
-- this is a message for github pages to indicate that I am using the rps-ui branch
-
-- mostly cleaned up legacy code, although some refactoring could be in order
-
-- could feed params through main game() function which is triggered on player R-P-S button press?
-
-function game() {
-    playerSelection = prompt("Rock, paper or scissors?");
-    computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
-}
-
-*/
-
 const COMPUTER_ICON = document.querySelector('.computer-icon');
 const PLAYER_ICON = document.querySelector('.player-icon');
 
@@ -29,26 +13,20 @@ let computerPointScore = 0;
 
 const ROCK_BUTTON = document.querySelector('.rock');
 ROCK_BUTTON.addEventListener('click', () => {
-    PLAYER_ICON.src = 'images/rock.png';
-    PLAYER_TEXT.textContent = "Rock";
     playRound("Rock", getComputerChoice());
   });
 
 const PAPER_BUTTON = document.querySelector('.paper');
 PAPER_BUTTON.addEventListener('click', () => {
-    PLAYER_ICON.src = 'images/paper.png';
-    PLAYER_TEXT.textContent = "Paper";
     playRound("Paper", getComputerChoice());
   });
 
 const SCISSORS_BUTTON = document.querySelector('.scissors');
 SCISSORS_BUTTON.addEventListener('click', () => {
-    PLAYER_ICON.src = 'images/scissors.png';
-    PLAYER_TEXT.textContent = "Scissors";
     playRound("Scissors", getComputerChoice());
   });
 
-function setComputerIcon (computerSelection) {
+function getComputerIcon (computerSelection) {
     switch (computerSelection) {
         case "Rock":
             COMPUTER_ICON.src = 'images/rock.png';
@@ -75,14 +53,15 @@ function getComputerChoice () {
     const computerOptions = ["Rock", "Paper", "Scissors"];
     let randomSelectionIndex = Math.floor(Math.random() * computerOptions.length);
     let computerSelection = computerOptions[randomSelectionIndex];
+    getComputerIcon(computerSelection);
     return computerSelection;
 }
 
 function playRound (playerSelection, computerSelection) {
-
-    setComputerIcon(computerSelection);
     switch (playerSelection) {
         case "Rock":
+            PLAYER_ICON.src = 'images/rock.png';
+            PLAYER_TEXT.textContent = "Rock";
             if (computerSelection == "Scissors") {
                 roundWin(playerSelection, computerSelection, "blunts");
                 return;
@@ -95,6 +74,8 @@ function playRound (playerSelection, computerSelection) {
             }
 
         case "Paper":
+            PLAYER_ICON.src = 'images/paper.png';
+            PLAYER_TEXT.textContent = "Paper";
             if (computerSelection == "Rock") {
                 roundWin(playerSelection, computerSelection, "wraps");
                 return;
@@ -107,6 +88,8 @@ function playRound (playerSelection, computerSelection) {
             }
         
         case "Scissors":
+            PLAYER_ICON.src = 'images/scissors.png';
+            PLAYER_TEXT.textContent = "Scissors";
             if (computerSelection == "Paper") {
                 roundWin(playerSelection, computerSelection, "cuts");
                 return;
@@ -124,6 +107,7 @@ function roundWin (playerSelection, computerSelection, itemVerb) {
     playerPointScore += 1;
     playerScoreText.textContent = `Player score: ${playerPointScore}`
     roundPlayedText.textContent = `You win! ${playerSelection} ${itemVerb} ${computerSelection}.`;
+    decideGame();
     return;
 }
 
@@ -131,10 +115,32 @@ function roundLose (playerSelection, computerSelection, itemVerb) {
     computerPointScore += 1;
     computerScoreText.textContent = `Computer score: ${computerPointScore}`
     roundPlayedText.textContent = `You lose! ${computerSelection} ${itemVerb} ${playerSelection}.`;
+    decideGame();
     return;
 }
 
 function roundDraw (playerSelection, computerSelection) {
     roundPlayedText.textContent = `Draw! ${playerSelection} is equal to ${computerSelection}.`;
+    decideGame();
     return;
+}
+
+function decideGame () {
+    if (playerPointScore >= 5) {
+        ROCK_BUTTON.setAttribute('disabled', 'disabled');
+        PAPER_BUTTON.setAttribute('disabled', 'disabled');
+        SCISSORS_BUTTON.setAttribute('disabled', 'disabled');
+
+        roundPlayedText.textContent = `You win! Refresh page to play again.`;
+
+    } else if (computerPointScore >= 5) {
+        ROCK_BUTTON.setAttribute('disabled', 'disabled');
+        PAPER_BUTTON.setAttribute('disabled', 'disabled');
+        SCISSORS_BUTTON.setAttribute('disabled', 'disabled');
+
+        roundPlayedText.textContent = `You lose! Refresh page to play again.`;
+
+    } else {
+        return;
+    }
 }
